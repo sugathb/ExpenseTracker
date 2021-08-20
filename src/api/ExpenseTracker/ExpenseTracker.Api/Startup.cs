@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Identity.Web;
 
 namespace ExpenseTracker.Api
 {
@@ -32,6 +33,8 @@ namespace ExpenseTracker.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ExpenseTracker.Api", Version = "v1" });
             });
+
+            services.AddMicrosoftIdentityWebApiAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +51,7 @@ namespace ExpenseTracker.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
